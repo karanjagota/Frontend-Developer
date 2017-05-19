@@ -1,0 +1,170 @@
+<html>
+<title>Radio App</title>
+<meta name='viewport' content='initial-scale=1.0, user-scalable=no'>
+<meta charset='utf-8'>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+<style>
+*{
+margin:0px;
+padding:0px;
+}
+#wrapper{
+width:100%;
+height:auto;
+}
+#header{
+background-color:rgba(0,0,0,.05);
+width:100%;
+height:12%;
+-webkit-transition-property:color , background-color;
+-webkit-transition-duration:1s;
+-webkit-transition-timing-function:linear;
+}
+#header:hover{
+background-color:black;
+color:white;
+}
+ #directions-panel {
+ background-color:rgba(0,0,0,0.008);
+ margin-top:5%;
+ height:70%;
+ float: right;
+ width: 28%;
+ overflow: auto;
+}
+#h{
+padding-left:5%;
+padding-top:.5%;
+}
+#input{
+width:auto;
+height:auto;
+margin-top:2%;
+}
+#canvas{
+width:100%;
+height:auto;
+margin-top:0%;
+background-color:rgba(0,0,0,.05);
+float:left;
+}
+#control {
+        background: rgba(0,0,0,.002);
+        padding: 5px;
+		margin:0%;
+		position:absolute;
+		z-index:5;
+		color:black;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+	  #start ,#end {
+	 padding:5px;
+	  }
+	  #mode{
+	  padding:5px;
+	  }
+	  
+.button_style{
+margin-top:2%;
+margin-left:5%;
+margin-bottom:2%;
+width:auto;
+height:auto;
+padding:10px;
+border: 1px solid #3079ed;
+color: #fff;
+text-shadow: 0 1px rgba(0,0,0,0.1);
+background-color: #4d90fe;
+}	  
+#second_div	{
+width:100%;
+height:auto;
+margin:0%;
+background-color:rgba(0,0,0,0);
+
+} 	 
+.playlist_div
+{
+width:90%;
+height:auto;
+margin:auto;
+margin-bottom:1%;
+margin-top:1%;
+box-shadow: 10px 10px 2px rgba(0,0,0,.05);
+background-color:white;
+padding:1%;
+}
+.p.title
+{
+}
+#gg{
+color:rgba(0,0,0,.8);
+padding:10px;
+}
+#duration{
+float:right;
+margin-right:5%;
+}
+
+#durationg
+{
+float:right;
+margin-right:4%;
+font-family:bold;
+}
+
+.kk{
+padding-top:0px;
+padding-left:10px;
+padding-bottom:10px;
+color:rgba(0,0,0,.8);
+}
+
+</style>
+</head>
+<body>
+<div id='wrapper'>
+<div id ='header'>
+<h1 id='h'> Radio App  </H1>
+<p id = 'h'> Single page Angular JS application that lets you play and add songs in your playlist.  </p> 
+</div>
+<div id ="second_div">
+<input class = "button_style" type="button" name="getplaylist" value = "Get Playlist" ng-click="myFunc()"/>
+<input class = "button_style" type="button" name="add_song" value = "Add Song to List"/>
+<input class = "button_style" type="button" name="getplaylist" value = "Remove Song By ID"/>
+</div>
+<div id='canvas' ng-app="radioapp" ng-controller="controler"> 
+
+<div class= "playlist_div" ng-repeat="x in myplaylist">
+<h3>Title : {{x.title}}</h3>
+<p id="gg" >_id : {{x._id}} <p id = "duration">{{x.duration}}</p>  </p>
+<p class = "kk">  id : {{x.id}}<p id ="durationg"><b>Duration</b></p></p>
+<p class = "kk"> __v : {{x.__v}}</p>
+
+</div>
+Developed By : karan jagota</br>
+Email : karanjagota.corp@gmail.com</br>
+</div>
+</div> 
+</body>
+
+<script>
+var app = angular.module('radioapp', []);
+app.controller('controler', function($scope, $http) {
+    $http.get("http://playlist-royletzchange.rhcloud.com/list").then(function(response) {
+	   $scope.myplaylist = response.data.data;
+    });
+});
+</script>
+
+
+
+
+
+
+</html>
